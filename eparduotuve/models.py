@@ -8,8 +8,7 @@ from django.db import models
 from datetime import date
 import uuid
 
-
-# from PIL import Image
+from PIL import Image
 
 
 class Krepselis(models.Model):
@@ -58,8 +57,8 @@ class Preke(models.Model):
     vieneto_kaina = models.FloatField('Vieneto kaina', null=True, blank=True)
     likutis = models.FloatField('Likutis', null=True, blank=True)
 
-    # nuotrauka = models.ImageField('Nuotrauka', upload_to='nuotraukos',
-    #                               null=True, blank=True)
+    nuotrauka = models.ImageField('Nuotrauka', upload_to='nuotraukos',
+                                  null=True, blank=True)
 
     def __str__(self):
         return f'{self.pavadinimas}'

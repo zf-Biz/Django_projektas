@@ -22,6 +22,7 @@ class KrepselioEilutesAdmin(admin.ModelAdmin):
 class PrekeAdmin(admin.ModelAdmin):
     list_display = ('pavadinimas', 'vieneto_kaina', 'likutis', 'prekes_kategorijos')
     list_editable = ('vieneto_kaina',)
+    search_fields = ('pavadinimas', 'kategorija')
 
 
 class KategorijaAdmin(admin.ModelAdmin):

@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.views import generic
+from django.db.models import Q
 
 from django.contrib.auth.decorators import login_required
 
@@ -36,3 +37,13 @@ class PrekeDetailView(generic.DetailView):  # generic.edit.FormMixin,
     model = Preke
     context_object_name = "preke"
     template_name = "preke_detail.html"
+
+
+def search(request):
+    query = request.GET["search_text"]
+    preke_results = Preke.objects.filter(Q(pavadinimas__icontains=query))
+    kategorija_results = Kategorija.objects.filter(Q(pavadinimas__icontains=query))
+
+    return render(request, "search.html", context={"preke_objects": preke_results,
+                                                   "kategorija_objects": kategorija_results,
+                                                   "query": query})
