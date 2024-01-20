@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<h1>{{ kategorija }}</h1>
+{% for p in kategorija.preke_set.all %}
+<div class="column">
+    <div class="col-sm-6 col-md-3 d-flex align-items-stretch">
+        <div class="card mb-4 shadow-sm">
+            {% if p.nuotrauka %}
+            <a href="{% url 'preke' p.id %}">
+                <img src="{{ p.nuotrauka.url }}" class="card-img-top"/>
+            </a>
+            {% else %}
+            <a href="{% url 'preke' p.id %}">
+                <img src="{% static 'img/no-image.png' %}" class="card-img-top"/>
+            </a>
+            {% endif %}
+            <div class="card-body">
+                <h6>
+                    {{ p.pavadinimas }}
+                </h6>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+{% endblock %}

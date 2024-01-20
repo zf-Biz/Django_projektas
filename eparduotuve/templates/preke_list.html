@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<h1>Prekių katalogas</h1>
+
+<div class="row">
+    {% for p in preke_list %}
+    <div class="col-sm-6 col-md-3 d-flex align-items-stretch">
+        <div class="card mb-4 shadow-sm">
+            {% if p.nuotrauka %}
+            <a href="{% url 'preke' p.id %}">
+                <img src="{{ p.nuotrauka.url }}" class="card-img-top"/>
+            </a>
+            {% else %}
+            <a href="{% url 'preke' p.id %}">
+                <img src="{% static 'img/no-image.png' %}" class="card-img-top"/>
+            </a>
+            {% endif %}
+            <div class="card-body">
+                <h6>
+                    {{ p.pavadinimas }}
+                </h6>
+                <h6 class="card-subtitle mb-2 text-muted">
+                    {{ p.prekes_kategorijos }}
+                </h6>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; pirmas</a>
+            <a href="?page={{ page_obj.previous_page_number }}">< atgal</a>
+        {% endif %}
+        <span class="current">
+        {{ page_obj.number }} /
+        {{ page_obj.paginator.num_pages}}
+        </span>
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">toliau ></a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">paskutinis &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+
+{% endblock %}

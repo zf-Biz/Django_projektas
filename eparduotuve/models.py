@@ -57,6 +57,7 @@ class Preke(models.Model):
     kategorija = models.ManyToManyField('Kategorija')
     vieneto_kaina = models.FloatField('Vieneto kaina', null=True, blank=True)
     likutis = models.FloatField('Likutis', null=True, blank=True)
+
     # nuotrauka = models.ImageField('Nuotrauka', upload_to='nuotraukos',
     #                               null=True, blank=True)
 

@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block "content" %}
+<h1>{{ preke.pavadinimas }}</h1>
+
+<p><strong>Kategorija:</strong> <a href="{% url 'kategorija' preke.kategorija.pk %}">{{ preke.kategorija }}</a></p>
+<p><strong>Vieneto kaina:</strong> {{ preke.vieneto_kaina }}</p>
+<p><strong>Likutis:</strong> {{ preke.likutis }}</p>
+
+{% endblock %}
