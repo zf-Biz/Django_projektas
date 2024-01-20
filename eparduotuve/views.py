@@ -6,5 +6,4 @@ from django.contrib.auth.decorators import login_required
 
 # @login_required
 def index(request):
-    return HttpResponse("Labas, pasauli!")
-    # return render(request, 'index.html')
+    return render(request, 'index.html')
