@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+</head>
+<body class="override">
+</body>
+</html>
+
+{% block content %}
+
+<div class="container">
+    <form method="post" action="{% url 'login' %}">
+        {% csrf_token %}
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-default">
+                <div class="panel-heading">Prisijungimas</div>
+                <div class="panel-body">
+                    {% if error_message %}
+                    <p class="bg-danger p-d ml-b">{{ error_message }}</p>
+                    {% endif %}
+                    <div class="form-group clearfix">
+                        <label for="username" class="col-md-4 control-label text-right">Vartotojas:</label>
+                        <div class="col-md-6">
+                            <input name="username" value="" type="text" class="form-control"/>
+                        </div>
+                    </div>
+                    <div class="form-group clearfix">
+                        <label for="password" class="col-md-4 control-label text-right">Slaptažodis:</label>
+                        <div class="col-md-6">
+                            <input name="password" type="password" class="form-control"/>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-md-offset-4">
+                        <input type="submit" value="Prisijungti"/>
+                        <input type="hidden" name="next" value="{{ next }}"/>
+                        <a href="">arba Užsiregistruoti</a>
+                    </div>
+                    <div class="col-md-6 col-md-offset-4">
+                        <a href="{% url 'password_reset' %}">Pamiršote slaptažodį?</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}
+<!--<button name=" login" type="submit" value="Prisijungti" class="btn btn-success"/> &nbsp;-->
