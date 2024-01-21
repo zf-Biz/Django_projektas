@@ -1,11 +1,37 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block "content" %}
+{% block content %}
 <h1>{{ preke.pavadinimas }}</h1>
 
-<p><strong>Kategorija:</strong> <a href="{% url 'kategorija' preke.kategorija.pk %}">{{ preke.kategorija }}</a></p>
+<p><strong>Kategorijos:</strong>
+    {% for p_k in preke.kategorija.all %}
+    <a href="{% url 'kategorija' p_k.id %}">{{ p_k.pavadinimas }}</a>
+    {% endfor %}
+</p>
 <p><strong>Vieneto kaina:</strong> {{ preke.vieneto_kaina }}</p>
 <p><strong>Likutis:</strong> {{ preke.likutis }}</p>
+
+<h4>Atsiliepimai: </h4>
+{% if preke.atsiliepimas_set.all %}
+{% for p_a in preke.atsiliepimas_set.all %}
+<small><strong>{{ p_a.vertintojas }} </strong> <i>{{ p_a.data }}</i></small>
+<p>{{ p_a.turinys }}</p>
+{% endfor %}
+{% else %}
+<p>Atsilipimų nėra.</p>
+{% endif %}
+<hr/>
+
+<div class="fieldWrapper">
+    <hr>
+    <br/>
+    <h4>Palikite atsiliepimą:</h4>
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form.turinys }}</br>
+        <input type="submit" value="Išsaugoti">
+    </form>
+</div>
 
 {% endblock %}

@@ -29,6 +29,10 @@ class KategorijaAdmin(admin.ModelAdmin):
     list_display = ('pavadinimas',)
 
 
+class AtsiliepimasAdmin(admin.ModelAdmin):
+    list_display = ('preke', 'data', 'vertintojas', 'turinys')
+
+
 # class ProfilisAdmin(admin.ModelAdmin):
 #     list_display = ('id', 'vartotojas', 'vardas', 'pavarde', 'kortele', 'status')
 #     list_editable = ('vardas', 'pavarde', 'kortele', 'status')
@@ -43,5 +47,5 @@ admin.site.register(KrepselioEilutes, KrepselioEilutesAdmin)
 admin.site.register(Preke, PrekeAdmin)
 admin.site.register(Kategorija, KategorijaAdmin)
 # admin.site.register(Profilis, ProfilisAdmin)
-admin.site.register(Atsiliepimas)
+admin.site.register(Atsiliepimas, AtsiliepimasAdmin)
 admin.site.register(PristatymoBudas, PristatymoBudasAdmin)

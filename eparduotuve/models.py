@@ -1,7 +1,7 @@
 from django.db import models
 
 from django.db import models
-# from django.contrib.auth.models import User
+from django.contrib.auth.models import User
 # from django.utils.translation import gettext_lazy as _
 
 # from tinymce.models import HTMLField
@@ -86,14 +86,15 @@ class Kategorija(models.Model):
 
 class Atsiliepimas(models.Model):
     preke = models.ForeignKey(Preke, on_delete=models.CASCADE, blank=True)
-    # vertintojas = models.ForeignKey(User, on_delete=models.SET_NULL,
-    #                                 blank=True, null=True)
+    vertintojas = models.ForeignKey(User, on_delete=models.SET_NULL,
+                                    blank=True, null=True)
     data = models.DateTimeField(auto_now_add=True)
     turinys = models.TextField('Atsiliepimas', max_length=2000)
 
     class Meta:
         verbose_name = 'Atsiliepimas'
         verbose_name_plural = 'Atsiliepimai'
+        ordering = ['-data']
 
 
 class PristatymoBudas(models.Model):

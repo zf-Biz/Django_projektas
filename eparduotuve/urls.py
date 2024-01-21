@@ -9,4 +9,6 @@ urlpatterns = [
     path('prekes/', views.PrekesListView.as_view(), name='prekes'),
     path('prekes/<int:pk>', views.PrekeDetailView.as_view(), name='preke'),
     path("search/", views.search, name="search"),
+
+    path("register/", views.register_user, name="register"),
 ]

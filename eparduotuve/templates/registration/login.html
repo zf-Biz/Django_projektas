@@ -39,7 +39,7 @@
                     <div class="col-md-6 col-md-offset-4">
                         <input type="submit" value="Prisijungti"/>
                         <input type="hidden" name="next" value="{{ next }}"/>
-                        <a href="">arba Užsiregistruoti</a>
+                        <a href="{% url 'register'%}">arba Užsiregistruoti</a>
                     </div>
                     <div class="col-md-6 col-md-offset-4">
                         <a href="{% url 'password_reset' %}">Pamiršote slaptažodį?</a>
