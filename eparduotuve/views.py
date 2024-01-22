@@ -12,7 +12,7 @@ from django.contrib.auth.decorators import login_required
 
 from .models import (Krepselis, KrepselioEilutes, Preke,
                      Kategorija, Atsiliepimas, PristatymoBudas)
-from .forms import PrekeAtsiliepimasForm
+from .forms import PrekeAtsiliepimasForm, UserUpdateForm, ProfileUpdateForm
 
 
 @login_required
@@ -99,3 +99,24 @@ def register_user(request):
     User.objects.create_user(username=username, email=email, password=password)
     messages.success(request, ("User %s created!!!") % username)
     return redirect('index')
+
+
+@login_required
+def profilis(request):
+    if request.method == "POST":
+        u_form = UserUpdateForm(request.POST, instance=request.user)
+        p_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profilis)
+        if u_form.is_valid() and p_form.is_valid():
+            u_form.save()
+            p_form.save()
+            messages.success(request, f"Profilis atnaujintas")
+            return redirect('profilis')
+    else:
+        u_form = UserUpdateForm(instance=request.user)
+        p_form = ProfileUpdateForm(instance=request.user.profilis)
+
+    context = {
+        'u_form': u_form,
+        'p_form': p_form,
+    }
+    return render(request, 'profilis.html', context)

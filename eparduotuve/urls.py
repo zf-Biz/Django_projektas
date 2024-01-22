@@ -11,4 +11,5 @@ urlpatterns = [
     path("search/", views.search, name="search"),
 
     path("register/", views.register_user, name="register"),
+    path('profilis/', views.profilis, name='profilis'),
 ]

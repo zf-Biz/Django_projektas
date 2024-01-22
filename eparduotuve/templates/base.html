@@ -60,7 +60,7 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
 
-                <li class="nav-item"><a class="nav-link" href="">
+                <li class="nav-item"><a class="nav-link" href="{% url 'profilis' %}">
                     <svg class="bi bi-person"
                          width="1.5em"
                          height="1.5em"
@@ -72,7 +72,7 @@
                             1.332-.678.678-.83 1.418-.832 1.664a1.05 1.05 0 00.022.004zm9.974.056v-.002.002zM8
                             7a2 2 0 100-4 2 2 0 000 4zm3-2a3 3 0 11-6 0 3 3 0 016 0z" clip-rule="evenodd"/>
                     </svg>
-                    {{ user }}</a></li>
+                    {{ user.get_username }}</a></li>
                 <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Atsijungti</a>
                 </li>
                 <li class="nav-item"><a class="nav-link" href="{% url 'prekes' %}">

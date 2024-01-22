@@ -105,3 +105,25 @@ class PristatymoBudas(models.Model):
     class Meta:
         verbose_name = 'Pristatymo būdas'
         verbose_name_plural = 'Pristatymo būdai'
+
+
+class Profilis(models.Model):
+    vartotojas = models.OneToOneField(User, on_delete=models.CASCADE)
+    vardas = models.CharField('Vardas', max_length=50)
+    pavarde = models.CharField('Pavardė', max_length=50)
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, help_text='Unikalus vartotojo ID.')
+    kortele = models.CharField(max_length=13, verbose_name='Banko kortelės numeris',
+                               null=True, blank=True)
+    APMOKEJIMO_BUDAS_STATUS = (
+        ('k', 'Kortele'),
+        ('g', 'Grynaisiais'),
+        ('p', 'Pavedimu'),
+        ('d', 'Dovanų čekis'),
+    )
+    status = models.CharField(max_length=1, choices=APMOKEJIMO_BUDAS_STATUS, blank=True,
+                              default='k', help_text='Apmokėjimo būdo pasirinkimas',
+                              verbose_name='Apmokėjimas')
+
+    class Meta:
+        verbose_name = 'Profilis'
+        verbose_name_plural = 'Profiliai'

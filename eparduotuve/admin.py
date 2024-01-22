@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from .models import (Krepselis, KrepselioEilutes, Preke,
-                     Kategorija, Atsiliepimas, PristatymoBudas)
+                     Kategorija, Atsiliepimas, PristatymoBudas, Profilis)
 
 
 class KrepselioEilutesInLine(admin.TabularInline):
@@ -46,6 +46,6 @@ admin.site.register(Krepselis, KrepselisAdmin)
 admin.site.register(KrepselioEilutes, KrepselioEilutesAdmin)
 admin.site.register(Preke, PrekeAdmin)
 admin.site.register(Kategorija, KategorijaAdmin)
-# admin.site.register(Profilis, ProfilisAdmin)
+admin.site.register(Profilis)  # , ProfilisAdmin
 admin.site.register(Atsiliepimas, AtsiliepimasAdmin)
 admin.site.register(PristatymoBudas, PristatymoBudasAdmin)

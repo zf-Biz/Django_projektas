@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Atsiliepimas,  User, Preke
+from .models import Atsiliepimas, User, Preke, Profilis
 
 
 class PrekeAtsiliepimasForm(forms.ModelForm):
@@ -14,18 +14,18 @@ class PrekeAtsiliepimasForm(forms.ModelForm):
         }
 
 
-# class UserUpdateForm(forms.ModelForm):
-#     email = forms.EmailField()
-#
-#     class Meta:
-#         model = User
-#         fields = ('username', 'email')
-#
-#
-# class ProfileUpdateForm(forms.ModelForm):
-#     class Meta:
-#         model = Profile
-#         fields = ('picture',)
+class UserUpdateForm(forms.ModelForm):
+    email = forms.EmailField()
+
+    class Meta:
+        model = User
+        fields = ('username', 'email')
+
+
+class ProfileUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Profilis
+        fields = ('vardas', 'pavarde', 'kortele', 'status')
 #
 # class DateInput(forms.DateInput):
 #     input_type = 'date'
