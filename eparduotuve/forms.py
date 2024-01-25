@@ -46,3 +46,6 @@ class UserKrepselioEilutesCreateForm(forms.ModelForm):
     class Meta:
         model = KrepselioEilutes
         fields = ('krepselis', 'preke', 'kiekis')
+        # widgets = {
+        #     'krepselis': forms.,
+        # }

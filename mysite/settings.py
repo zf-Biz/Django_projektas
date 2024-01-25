@@ -167,3 +167,10 @@ TINYMCE_DEFAULT_CONFIG = {
     'menubar': True,
     'statusbar': True,
 }
+
+from django.utils.translation import gettext_lazy as _
+
+LANGUAGES = (
+    ('lt', _('Lithuanian')),
+    ('en-us', _('English')),
+)

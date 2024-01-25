@@ -4,31 +4,31 @@
 {% block content %}
 <h1>{{ preke.pavadinimas }}</h1>
 
-<p><strong>Kategorijos:</strong>
+<p><strong>{% trans "Kategorijos" %}:</strong>
     {% for p_k in preke.kategorija.all %}
     <a href="{% url 'kategorija' p_k.id %}">{{ p_k.pavadinimas }}</a>
     {% endfor %}
 </p>
-<p><strong>Vieneto kaina:</strong> {{ preke.vieneto_kaina }} €</p>
-<p><strong>Likutis:</strong> {{ preke.likutis }} vnt.</p>
-<p><strong>Aprašymas:</strong> {{ preke.aprasymas | safe }}</p>
+<p><strong>{% trans "Vieneto kaina" %}:</strong> {{ preke.vieneto_kaina }} €</p>
+<p><strong>{% trans "Likutis" %}:</strong> {{ preke.likutis }} vnt.</p>
+<p><strong>{% trans "Aprašymas" %}:</strong> {{ preke.aprasymas | safe }}</p>
 
 
-<h4>Atsiliepimai: </h4>
+<h4>{% trans "Atsiliepimai" %}: </h4>
 {% if preke.atsiliepimas_set.all %}
 {% for p_a in preke.atsiliepimas_set.all %}
 <small><strong>{{ p_a.vertintojas }} </strong> <i>{{ p_a.data }}</i></small>
 <p>{{ p_a.turinys }}</p>
 {% endfor %}
 {% else %}
-<p>Atsilipimų nėra.</p>
+<p>{% trans "Atsilipimų nėra." %}</p>
 {% endif %}
 <hr/>
 
 <div class="fieldWrapper">
     <hr>
     <br/>
-    <h4>Palikite atsiliepimą:</h4>
+    <h4>{% trans "Palikite atsiliepimą" %}:</h4>
     <form action="" method="post">
         {% csrf_token %}
         {{ form.turinys }}</br>

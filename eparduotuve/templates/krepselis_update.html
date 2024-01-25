@@ -7,9 +7,9 @@
 
 <form method="post">
     {% csrf_token %}
-    <h4>Vartotojo id: {{ user.profilis.u_id }}</h4>
+    <h4>{% trans "Vartotojo id" %}: {{ user.profilis.u_id }}</h4>
     <h4>{{ user.profilis.vardas }} {{ user.profilis.pavarde }}</h4>
-    <p>Krepšelio pristatymo data: {{ krepselioeilutes.krepselis.data }}</p>
+    <p>{% trans "Krepšelio pristatymo data" %}: {{ krepselioeilutes.krepselis.data }}</p>
     <p>{{ krepselioeilutes.krepselis.vartotojas }}</p>
     <br><br>
     {% if krepselioeilutes_set.all %}
@@ -18,10 +18,10 @@
         <a href="{% url 'preke' p.preke.id %}">
             {{ p.preke }}
         </a>
-        {{ p.kiekis }} vienetai, suma: {{ p.suma }}</p>
+        {{ p.kiekis }} {% trans "vienetai" %}, {% trans "suma" %}: {{ p.suma }}</p>
     {% endfor %}
     {% else %}
-    <p>Krepšelis tuščias</p>
+    <p>{% trans "Krepšelis tuščias" %}</p>
     {% endif %}
 
     {{ form | crispy }}
@@ -31,11 +31,11 @@
         <fieldset class="form-group">
             <div class="form-group">
                 <button class="btn btn-outline-info" type="submit">
-                    Išsaugoti
+                    {% trans "Išsaugoti" %}
                 </button>
                 <a class="btn btn-outline-light"
                    href="">
-                    Atšaukti
+                    {% trans "Atšaukti" %}
                 </a>
 
             </div>

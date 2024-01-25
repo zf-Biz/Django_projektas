@@ -2,22 +2,22 @@
 {% load static %}
 
 {% block content %}
-<h2>Paieškos pagal "{{ query }}" rezultatai:</h2>
+<h2>{% trans "Paieškos pagal" %} "{{ query }}" {% trans "rezultatai" %}:</h2>
 <p></p>
 {% if preke_objects %}
 <ul>
     {% for p_o in preke_objects %}
     <li>
-        <p><strong>Prekė: </strong>
+        <p><strong>{% trans "Prekė" %}: </strong>
             <a href="{% url 'preke' p_o.id %}">{{ p_o.pavadinimas }}</a>
         </p>
-        <p><strong>Kategorija: </strong>{{ p_o.prekes_kategorijos }}</p>
+        <p><strong>{% trans "Kategorija" %}: </strong>{{ p_o.prekes_kategorijos }}</p>
         <hr/>
     </li>
     {% endfor %}
 </ul>
 {% else %}
-<p>Nieko nerasta...</p>
+<p>{% trans "Nieko nerasta" %}...</p>
 {% endif %}
 
 {% if kategorija_objects %}
@@ -30,6 +30,6 @@
     {% endfor %}
 </ul>
 {% else %}
-<p>Nieko nerasta...</p>
+<p>{% trans "Nieko nerasta" %}...</p>
 {% endif %}
 {% endblock %}

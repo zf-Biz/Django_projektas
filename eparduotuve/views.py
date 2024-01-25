@@ -176,7 +176,7 @@ class KrepselisByUserDeleteView(LoginRequiredMixin, UserPassesTestMixin, generic
         return krepselis_o.vartotojas == self.request.user
 
 
-class KrepselioEiluteByUserUpdateView(LoginRequiredMixin, generic.UpdateView):
+class KrepselioEiluteByUserUpdateView(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView):
     model = KrepselioEilutes
     # success_url =
     template_name = 'krepselio_eilutes_update.html'
@@ -187,6 +187,14 @@ class KrepselioEiluteByUserUpdateView(LoginRequiredMixin, generic.UpdateView):
     def form_valid(self, form):
         form.instance.vartotojas = self.request.user
         return super().form_valid(form)
+
+    def test_func(self):
+        krepseliseilutes_o = self.get_object()
+        return krepseliseilutes_o.krepselis.vartotojas == self.request.user
+
+    def get_success_url(self):
+        pk = self.kwargs["pk"]
+        return reverse("mano-krepselis", kwargs={"pk": pk})
 
 
 class KrepselioEiluteByUserCreateView(LoginRequiredMixin, generic.CreateView):
