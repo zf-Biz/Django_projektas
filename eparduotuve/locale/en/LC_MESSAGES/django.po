@@ -1,0 +1,389 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-01-25 14:18+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+#: .\models.py:13
+msgid "User"
+msgstr ""
+
+#: .\models.py:15
+msgid "Paštomatas"
+msgstr "Parcel machine"
+
+#: .\models.py:16
+msgid "Kurjeris"
+msgstr "Courier"
+
+#: .\models.py:17
+msgid "Atsiėmimas parduotuvėje"
+msgstr "In-store pick-up"
+
+#: .\models.py:20
+msgid "Krepšelio pristatymo pasirinkimas"
+msgstr "Choice of basket delivery"
+
+#: .\models.py:21 .\models.py:30
+msgid "Būsena"
+msgstr "Status"
+
+#: .\models.py:22 .\templates\krepselis.html:17
+msgid "Pristatymo data"
+msgstr "Delivery date"
+
+#: .\models.py:24
+msgid "Laukiama apmokėjimo"
+msgstr "Waiting for payment"
+
+#: .\models.py:25
+msgid "Vykdoma"
+msgstr "Executing"
+
+#: .\models.py:26
+msgid "Atšaukta"
+msgstr "Canceled"
+
+#: .\models.py:29
+msgid "Krepšelio būsena"
+msgstr "Cart status"
+
+#: .\models.py:53
+msgid "Krepšelis"
+msgstr "Cart"
+
+#: .\models.py:54 .\templates\base.html:111
+msgid "Krepšeliai"
+msgstr "Carts"
+
+#: .\models.py:69
+msgid "Krepšelio eilutė"
+msgstr "Cart line"
+
+#: .\models.py:70
+msgid "Krepšelio eilutės"
+msgstr "Cart lines"
+
+#: .\models.py:74
+msgid "Prekės pavadinimas"
+msgstr "Item name"
+
+#: .\models.py:75 .\models.py:103 .\templates\search.html:15
+msgid "Kategorija"
+msgstr "Category"
+
+#: .\models.py:76 .\templates\preke_detail.html:13
+msgid "Vieneto kaina"
+msgstr "Unit price"
+
+#: .\models.py:77 .\templates\preke_detail.html:14
+msgid "Likutis"
+msgstr "Remainder"
+
+#: .\models.py:79
+msgid "Nuotrauka"
+msgstr "Photo"
+
+#: .\models.py:89 .\models.py:104 .\templates\base.html:103
+#: .\templates\kategorija_list.html:6 .\templates\preke_detail.html:8
+msgid "Kategorijos"
+msgstr "Categories"
+
+#: .\models.py:92 .\templates\search.html:12
+msgid "Prekė"
+msgstr "Item"
+
+#: .\models.py:93
+msgid "Prekės"
+msgstr "Items"
+
+#: .\models.py:97
+msgid "Kategorijos pavadinimas"
+msgstr "Name of category"
+
+#: .\models.py:112 .\models.py:115
+msgid "Atsiliepimas"
+msgstr "Review"
+
+#: .\models.py:116 .\templates\preke_detail.html:18
+msgid "Atsiliepimai"
+msgstr "Reviews"
+
+#: .\models.py:121
+msgid "Atsiėmimo iš parduotuvės adresas"
+msgstr "Address for collection from the shop"
+
+#: .\models.py:122
+msgid "Pristatymo adresas"
+msgstr "Delivery adress"
+
+#: .\models.py:123
+msgid "Paštomato adresas"
+msgstr "Parcel machine adress"
+
+#: .\models.py:126
+msgid "Pristatymo būdas"
+msgstr "Delivery method"
+
+#: .\models.py:127
+msgid "Pristatymo būdai"
+msgstr "Delivery methods"
+
+#: .\models.py:132
+msgid "Vardas"
+msgstr "First name"
+
+#: .\models.py:133
+msgid "Pavardė"
+msgstr "Last name"
+
+#: .\models.py:134
+msgid "Adresas"
+msgstr "Adress"
+
+#: .\models.py:135
+msgid "Unikalus vartotojo ID."
+msgstr "User unique ID"
+
+#: .\models.py:136
+msgid "Banko kortelės numeris"
+msgstr "Bank card number"
+
+#: .\models.py:139
+msgid "Kortele"
+msgstr "By card"
+
+#: .\models.py:140
+msgid "Grynaisiais"
+msgstr "By cash"
+
+#: .\models.py:141
+msgid "Pavedimu"
+msgstr "By bank transfer"
+
+#: .\models.py:142
+msgid "Dovanų čekis"
+msgstr "Gift card"
+
+#: .\models.py:145
+msgid "Apmokėjimo būdo pasirinkimas"
+msgstr "Choice of payment"
+
+#: .\models.py:146
+msgid "Apmokėjimas"
+msgstr "Payment"
+
+#: .\models.py:149
+msgid "Profilis"
+msgstr "Profile"
+
+#: .\models.py:150
+msgid "Profiliai"
+msgstr "Profiles"
+
+#: .\templates\base.html:84
+msgid "Atsijungti"
+msgstr "Logout"
+
+#: .\templates\base.html:93 .\templates\preke_list.html:6
+msgid "Prekių katalogas"
+msgstr "Product catalogue"
+
+#: .\templates\base.html:116
+msgid "EN"
+msgstr "EN"
+
+#: .\templates\base.html:149
+msgid "Ieškoti"
+msgstr "Search"
+
+#: .\templates\index.html:6
+msgid "Parduotuvė"
+msgstr "Shop"
+
+#: .\templates\index.html:10
+msgid "Naujas krepšelis"
+msgstr "New cart"
+
+#: .\templates\krepseliai.html:9 .\templates\krepseliai.html:28
+msgid "Mano krepšeliai"
+msgstr "My carts"
+
+#: .\templates\krepseliai.html:18
+msgid "Pašalinti krepšelį"
+msgstr "Delete cart"
+
+#: .\templates\krepseliai.html:30
+msgid "Krepšelių sąrašas tuščias"
+msgstr "Empty cart list"
+
+#: .\templates\krepselio_eilutes_delete.html:11
+msgid "Ištrinti prekę"
+msgstr "Delete item"
+
+#: .\templates\krepselio_eilutes_delete.html:12
+msgid "Ar tikrai norite ištrinti prekę"
+msgstr "Do you wish to delete"
+
+#: .\templates\krepselio_eilutes_delete.html:15
+#: .\templates\krepselis_delete.html:15
+msgid "Patvirtinti"
+msgstr "Confirm"
+
+#: .\templates\krepselio_eilutes_delete.html:18
+#: .\templates\krepselis_delete.html:18 .\templates\krepselis_update.html:39
+msgid "Atšaukti"
+msgstr "Cancel"
+
+#: .\templates\krepselio_eilutes_update.html:11
+msgid "Naujos prekės pridėjimas"
+msgstr "Add new item"
+
+#: .\templates\krepselio_eilutes_update.html:15
+#: .\templates\krepselis_update.html:35 .\templates\naujas_krepselis.html:15
+msgid "Išsaugoti"
+msgstr "Save"
+
+#: .\templates\krepselis.html:11 .\templates\krepselis_update.html:11
+msgid "Vartotojo id"
+msgstr "User id"
+
+#: .\templates\krepselis.html:15
+msgid "Mano krepšelis"
+msgstr "My cart"
+
+#: .\templates\krepselis.html:26 .\templates\krepselis_update.html:22
+msgid "vienetai"
+msgstr "units"
+
+#: .\templates\krepselis.html:26 .\templates\krepselis_update.html:22
+msgid "suma"
+msgstr "sum"
+
+#: .\templates\krepselis.html:29
+msgid "Pašalinti prekę"
+msgstr "Remove item"
+
+#: .\templates\krepselis.html:35
+msgid "Bendra suma"
+msgstr "Total"
+
+#: .\templates\krepselis.html:37 .\templates\krepselis_update.html:25
+msgid "Krepšelis tuščias"
+msgstr "Cart empty"
+
+#: .\templates\krepselis.html:45
+msgid "Mokėjimo būdas"
+msgstr "Payment method"
+
+#: .\templates\krepselis.html:55
+msgid "Pristatymas"
+msgstr "Delivery"
+
+#: .\templates\krepselis.html:71
+msgid "Redaguoti krepšelį"
+msgstr "Edit cart"
+
+#: .\templates\krepselis.html:76
+msgid "Papildyti"
+msgstr "Add"
+
+#: .\templates\krepselis_delete.html:11
+msgid "Ištrinti krepšelį"
+msgstr "Delete cart"
+
+#: .\templates\krepselis_delete.html:12
+msgid "Ar tikrai norite ištrinti krepšelį"
+msgstr "Do You wish to delete"
+
+#: .\templates\krepselis_update.html:13
+msgid "Krepšelio pristatymo data"
+msgstr "Date of cart delivery"
+
+#: .\templates\naujas_krepselis.html:11
+msgid "Nauja krepšelis"
+msgstr "New cart"
+
+#: .\templates\preke_detail.html:15
+msgid "Aprašymas"
+msgstr "Description"
+
+#: .\templates\preke_detail.html:25
+msgid "Atsilipimų nėra."
+msgstr "No reviews"
+
+#: .\templates\preke_detail.html:32
+msgid "Palikite atsiliepimą"
+msgstr "Write a review"
+
+#: .\templates\preke_list.html:37
+msgid "pirmas"
+msgstr "first"
+
+#: .\templates\preke_list.html:38
+msgid "atgal"
+msgstr "back"
+
+#: .\templates\preke_list.html:45
+msgid "toliau"
+msgstr "next"
+
+#: .\templates\preke_list.html:46
+msgid "paskutinis"
+msgstr "last"
+
+#: .\templates\profilis.html:22
+msgid "Profilio informacija"
+msgstr "Profile info"
+
+#: .\templates\profilis.html:28
+msgid "Atnaujinti"
+msgstr "Update"
+
+#: .\templates\search.html:6
+msgid "Paieškos pagal"
+msgstr "Search of"
+
+#: .\templates\search.html:6
+msgid "rezultatai"
+msgstr "results"
+
+#: .\templates\search.html:21 .\templates\search.html:34
+msgid "Nieko nerasta"
+msgstr "Nothing found"
+
+#: .\views.py:89
+msgid "Slaptažodžiai nesutampa!!!"
+msgstr "Password do not match!!!"
+
+#: .\views.py:92
+#, python-brace-format
+msgid "{User} užimtas!!!"
+msgstr "{User} exists!!!"
+
+#: .\views.py:95
+#, python-brace-format
+msgid "Elektronis pašto adresas {email} yra registruotas!!!"
+msgstr "Email {email} already exists!!!"
+
+#: .\views.py:101
+#, python-brace-format
+msgid "{User} created!!!"
+msgstr ""
+
+#: .\views.py:113
+msgid "Profilis atnaujintas"
+msgstr "Profile updated"

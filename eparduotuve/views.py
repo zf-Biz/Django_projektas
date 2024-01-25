@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from django.views.decorators.csrf import csrf_protect
 from django.contrib import messages
 from django.views.generic.edit import FormMixin
+from django.utils.translation import gettext as _
 
 from django.contrib.auth.decorators import login_required
 
@@ -85,19 +86,19 @@ def register_user(request):
     password2 = request.POST["password2"]
 
     if password != password2:
-        messages.error(request, ("Passwords don't match!!!"))
+        messages.error(request, (_("Slaptažodžiai nesutampa!!!")))
 
     if User.objects.filter(username=username).exists():
-        messages.error(request, ("User %s already exists!!!") % username)
+        messages.error(request, (_(f"{User} užimtas!!!")) % username)
 
     if User.objects.filter(email=email).exists():
-        messages.error(request, (f"Email {email} already registered!!!"))
+        messages.error(request, (_(f"Elektronis pašto adresas {email} yra registruotas!!!")))
 
     if messages.get_messages(request):
         return redirect('register')
 
     User.objects.create_user(username=username, email=email, password=password)
-    messages.success(request, ("User %s created!!!") % username)
+    messages.success(request, (_(f"{User} sukurtas!!!")) % username)
     return redirect('index')
 
 
@@ -109,7 +110,7 @@ def profilis(request):
         if u_form.is_valid() and p_form.is_valid():
             u_form.save()
             p_form.save()
-            messages.success(request, f"Profilis atnaujintas")
+            messages.success(request, _(f"Profilis atnaujintas"))
             return redirect('profilis')
     else:
         u_form = UserUpdateForm(instance=request.user)
