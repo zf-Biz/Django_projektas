@@ -30,6 +30,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'eparduotuve.apps.EparduotuveConfig',
+    'tinymce',
     'crispy_forms',
     'crispy_bootstrap4',
     'django.contrib.admin',
@@ -41,6 +42,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -101,9 +103,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'lt-lt'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Vilnius'
 
 USE_I18N = True
 
@@ -125,14 +127,43 @@ MEDIA_URL = '/media/'
 
 LOGIN_REDIRECT_URL = '/'
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_POST = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'mano_pastas@gmail.com'
-# el. pašto adresas iš kurio siųsite
-EMAIL_HOST_PASSWORD = 'VerySecret'
-# slaptažodis
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
+from . import secrets
+
+DEFAULT_FROM_EMAIL = secrets.EMAIL
+EMAIL_HOST = secrets.HOST
+EMAIL_PORT = 587
+EMAIL_USE_TLS = False
+EMAIL_HOST_USER = secrets.EMAIL
+EMAIL_HOST_PASSWORD = secrets.EMAIL_PASSWORD
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+TINYMCE_DEFAULT_CONFIG = {
+    'height': 360,
+    'width': 1120,
+    'cleanup_on_startup': True,
+    'custom_undo_redo_levels': 20,
+    'selector': 'textarea',
+    'plugins': '''
+ textcolor save link image media preview codesample contextmenu
+ table code lists fullscreen insertdatetime nonbreaking
+ contextmenu directionality searchreplace wordcount visualblocks
+ visualchars code fullscreen autolink lists charmap print hr
+ anchor pagebreak
+ ''',
+    'toolbar1': '''
+ fullscreen preview bold italic underline | fontselect,
+ fontsizeselect | forecolor backcolor | alignleft alignright |
+ aligncenter alignjustify | indent outdent | bullist numlist table |
+ | link image media | codesample |
+ ''',
+    'toolbar2': '''
+ visualblocks visualchars |
+ charmap hr pagebreak nonbreaking anchor | code |
+ ''',
+    'contextmenu': 'formats | link image',
+    'menubar': True,
+    'statusbar': True,
+}

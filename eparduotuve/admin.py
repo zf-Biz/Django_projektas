@@ -9,7 +9,7 @@ class KrepselioEilutesInLine(admin.TabularInline):
 
 
 class KrepselisAdmin(admin.ModelAdmin):
-    list_display = ('pristatymo_budas', 'krepselio_suma',
+    list_display = ('id', 'vartotojas', 'pristatymas_status', 'krepselio_suma',
                     'data', 'status')
     inlines = (KrepselioEilutesInLine,)
 
@@ -33,9 +33,9 @@ class AtsiliepimasAdmin(admin.ModelAdmin):
     list_display = ('preke', 'data', 'vertintojas', 'turinys')
 
 
-# class ProfilisAdmin(admin.ModelAdmin):
-#     list_display = ('id', 'vartotojas', 'vardas', 'pavarde', 'kortele', 'status')
-#     list_editable = ('vardas', 'pavarde', 'kortele', 'status')
+class ProfilisAdmin(admin.ModelAdmin):
+    list_display = ('u_id', 'vartotojas', 'vardas', 'pavarde', 'adresas', 'kortele', 'status')
+    list_editable = ('vardas', 'pavarde', 'kortele', 'status', 'adresas')
 
 
 class PristatymoBudasAdmin(admin.ModelAdmin):
@@ -46,6 +46,6 @@ admin.site.register(Krepselis, KrepselisAdmin)
 admin.site.register(KrepselioEilutes, KrepselioEilutesAdmin)
 admin.site.register(Preke, PrekeAdmin)
 admin.site.register(Kategorija, KategorijaAdmin)
-admin.site.register(Profilis)  # , ProfilisAdmin
+admin.site.register(Profilis, ProfilisAdmin)  #
 admin.site.register(Atsiliepimas, AtsiliepimasAdmin)
 admin.site.register(PristatymoBudas, PristatymoBudasAdmin)

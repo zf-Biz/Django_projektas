@@ -9,8 +9,10 @@
     <a href="{% url 'kategorija' p_k.id %}">{{ p_k.pavadinimas }}</a>
     {% endfor %}
 </p>
-<p><strong>Vieneto kaina:</strong> {{ preke.vieneto_kaina }}</p>
-<p><strong>Likutis:</strong> {{ preke.likutis }}</p>
+<p><strong>Vieneto kaina:</strong> {{ preke.vieneto_kaina }} €</p>
+<p><strong>Likutis:</strong> {{ preke.likutis }} vnt.</p>
+<p><strong>Aprašymas:</strong> {{ preke.aprasymas | safe }}</p>
+
 
 <h4>Atsiliepimai: </h4>
 {% if preke.atsiliepimas_set.all %}

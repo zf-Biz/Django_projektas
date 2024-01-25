@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+{% csrf_token %}
+{% if krepselis %}
+<h5>Mano krepšeliai</h5>
+{% for k in krepselis %}
+<div>
+    {% if k.is_overdue %}
+    <li>{{ k.id }}
+        <a href="{% url 'mano-krepselis' k.id %}">{{ k.data }}</a>
+        {{ k.get_status_display }}
+        <a href="{% url 'krepselis-istrinti' k.id %}">
+            <button class="btn btn-outline-danger" type="submit">
+                Pašalinti krepšelį
+            </button>
+        </a>
+    </li>
+    <hr/>
+    {% endif %}
+    {% endfor %}
+</div>
+
+{% else %}
+<h5>Mano krepšeliai</h5>
+<div>
+    <p> Krepšelių sąrašas tuščias</p>
+</div>
+
+{% endif %}
+{% endblock %}

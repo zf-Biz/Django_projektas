@@ -4,18 +4,23 @@ from django.db import models
 from django.contrib.auth.models import User
 # from django.utils.translation import gettext_lazy as _
 
-# from tinymce.models import HTMLField
-from datetime import date
+from tinymce.models import HTMLField
+from datetime import date, time
 import uuid
 
 from PIL import Image
 
 
 class Krepselis(models.Model):
-    # profilio_unikalus_id = models.ForeignKey('Profilis', on_delete=models.SET_NULL,
-    #                                          null=True, related_name='uuid')
-    pristatymo_budas = models.ForeignKey('Pristatymobudas', on_delete=models.SET_NULL,
-                                         null=True, related_name='budas')
+    vartotojas = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+    PRISTATYMAS_STATUS = (
+        ('p', 'Paštomatas'),
+        ('k', 'Kurjeris'),
+        ('a', 'Atsiėmimas parduotuvėje'),
+    )
+    pristatymas_status = models.CharField(max_length=1, choices=PRISTATYMAS_STATUS, blank=True,
+                                          default='k', help_text='Krepšelio pristatymo pasirinkimas',
+                                          verbose_name='Būsena')
     data = models.DateTimeField('Pristatymo data', null=True, blank=True)
     PREKE_STATUS = (
         ('l', 'Laukiama apmokėjimo'),
@@ -27,12 +32,29 @@ class Krepselis(models.Model):
                               verbose_name='Būsena')
 
     @property
+    def is_overdue(self):
+        if date.today().strftime("%Y-%m-%d %H:%M:%S") > str(self.data):
+            return False
+        else:
+            return True
+
+    @property
     def krepselio_suma(self):
         return sum([k_e.suma for k_e in self.krepselioeilutes_set.all()])
 
-    class Meta:
-        verbose_name = 'Krepšelis'
-        verbose_name_plural = 'Krepšeliai'
+    def Uzsakyti(self):
+        self.save()
+
+    def krepselio_eilutes(self):
+        return self.krepselioeilutes_set.all()
+
+    def __str__(self):
+        return f'{self.id} {self.data} {self.vartotojas}'
+
+
+class Meta:
+    verbose_name = 'Krepšelis'
+    verbose_name_plural = 'Krepšeliai'
 
 
 class KrepselioEilutes(models.Model):
@@ -59,6 +81,7 @@ class Preke(models.Model):
 
     nuotrauka = models.ImageField('Nuotrauka', upload_to='nuotraukos',
                                   null=True, blank=True)
+    aprasymas = HTMLField(blank=True)
 
     def __str__(self):
         return f'{self.pavadinimas}'
@@ -111,7 +134,8 @@ class Profilis(models.Model):
     vartotojas = models.OneToOneField(User, on_delete=models.CASCADE)
     vardas = models.CharField('Vardas', max_length=50)
     pavarde = models.CharField('Pavardė', max_length=50)
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, help_text='Unikalus vartotojo ID.')
+    adresas = models.CharField('Adresas', max_length=30, blank=True)
+    u_id = models.UUIDField(primary_key=True, default=uuid.uuid4, help_text='Unikalus vartotojo ID.')
     kortele = models.CharField(max_length=13, verbose_name='Banko kortelės numeris',
                                null=True, blank=True)
     APMOKEJIMO_BUDAS_STATUS = (
@@ -127,3 +151,6 @@ class Profilis(models.Model):
     class Meta:
         verbose_name = 'Profilis'
         verbose_name_plural = 'Profiliai'
+
+    def __str__(self):
+        return f'{self.vartotojas}'

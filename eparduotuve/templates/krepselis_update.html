@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block content %}
+
+
+<form method="post">
+    {% csrf_token %}
+    <h4>Vartotojo id: {{ user.profilis.u_id }}</h4>
+    <h4>{{ user.profilis.vardas }} {{ user.profilis.pavarde }}</h4>
+    <p>Krepšelio pristatymo data: {{ krepselioeilutes.krepselis.data }}</p>
+    <p>{{ krepselioeilutes.krepselis.vartotojas }}</p>
+    <br><br>
+    {% if krepselioeilutes_set.all %}
+    {% for p in krepselis.krepselioeilutes_set.all %}
+    <p>
+        <a href="{% url 'preke' p.preke.id %}">
+            {{ p.preke }}
+        </a>
+        {{ p.kiekis }} vienetai, suma: {{ p.suma }}</p>
+    {% endfor %}
+    {% else %}
+    <p>Krepšelis tuščias</p>
+    {% endif %}
+
+    {{ form | crispy }}
+
+    <form method="post">
+        {% csrf_token %}
+        <fieldset class="form-group">
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit">
+                    Išsaugoti
+                </button>
+                <a class="btn btn-outline-light"
+                   href="">
+                    Atšaukti
+                </a>
+
+            </div>
+        </fieldset>
+
+    </form>
+</form>
+{{ request.path }}
+{% endblock %}

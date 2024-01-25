@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block content %}
+
+
+</form>
+
+<h4>Vartotojo id: {{ user.profilis.u_id }}</h4>
+<h4>{{ user.profilis.vardas }} {{ user.profilis.pavarde }}</h4>
+<br><br>
+<ul>
+    <h5>Mano krepšelis</h5>
+    <br>
+    <p>Pristatymo data: {{ krepselis.data }}</p>
+    <hr/>
+
+    {% if krepselis.krepselioeilutes_set.all %}
+    {% for p in krepselis.krepselioeilutes_set.all %}
+    <p>
+        <a href="{% url 'preke' p.preke.id %}">
+            {{ p.preke }}
+        </a>
+        {{ p.kiekis }} vienetai, suma: {{ p.suma }}
+        <a href="{% url 'eilute-istrinti' p.preke.id %}">
+            <button class="btn btn-outline-danger" type="submit">
+                Pašalinti prekę
+            </button>
+        </a>
+    </p>
+
+    {% endfor %}
+    <p><strong>Bendra suma: </strong>{{ krepselis.krepselio_suma }}</p>
+    {% else %}
+    <p>Krepšelis tuščias</p>
+    {% endif %}
+    <hr/>
+
+    <br><br>
+
+    <form>
+        <div>
+            <label>Mokėjimo būdas:</label>
+            <select name="mokejimo-budas">
+                {% for a,b in user.profilis.APMOKEJIMO_BUDAS_STATUS %}
+                <option value='{{ a }}'>
+                    {{ b }}
+                </option>
+                {% endfor %}
+            </select>
+        </div>
+        <div>
+            <label>Pristatymas:</label>
+            <select name="pristatymo-budas">
+                {% for a,b in krepselis.PRISTATYMAS_STATUS %}
+                <option value='{{ a }}'>
+                    {{ b }}
+                </option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <br><br>
+
+
+    </form>
+    <a href="{% url 'krepselis-atnaujinti' krepselis.id %}">
+        <button class="btn btn-outline-success" type="submit">
+            Redaguoti krepšelį
+        </button>
+    </a>
+    <a href="{% url 'eilute-atnaujinti' krepselis.id %}">
+        <button class="btn btn-outline-primary" type="submit">
+            Papildyti
+        </button>
+    </a>
+
+</ul>
+</form>
+{% endblock %}
