@@ -7,13 +7,18 @@ from django.views.decorators.csrf import csrf_protect
 from django.contrib import messages
 from django.views.generic.edit import FormMixin
 from django.utils.translation import gettext as _
+from django.core.mail import send_mail, BadHeaderError
+from django.http import HttpResponse, HttpResponseRedirect
+from django.views.generic import FormView, TemplateView
+from django.urls import reverse_lazy
 
 from django.contrib.auth.decorators import login_required
 
 from .models import (Krepselis, KrepselioEilutes, Preke,
                      Kategorija, Atsiliepimas, PristatymoBudas)
 from .forms import (PrekeAtsiliepimasForm, UserUpdateForm,
-                    ProfileUpdateForm, UserKrepselisCreateForm, UserKrepselioEilutesCreateForm)
+                    ProfileUpdateForm, UserKrepselisCreateForm, UserKrepselioEilutesCreateForm,
+                    ContactForm)
 
 
 @login_required
@@ -61,7 +66,7 @@ class PrekeDetailView(LoginRequiredMixin, generic.DetailView, FormMixin):  # gen
         form.instance.preke = self.object
         form.instance.vertintojas = self.request.user
         form.save()
-        return super(PrekeAtsiliepimasForm, self).form_valid(form)
+        return super().form_valid(form)
 
 
 def search(request):
@@ -89,7 +94,7 @@ def register_user(request):
         messages.error(request, (_("Slaptažodžiai nesutampa!!!")))
 
     if User.objects.filter(username=username).exists():
-        messages.error(request, (_(f"{User} užimtas!!!")) % username)
+        messages.error(request, f"{username} užimtas!!!")
 
     if User.objects.filter(email=email).exists():
         messages.error(request, (_(f"Elektronis pašto adresas {email} yra registruotas!!!")))
@@ -98,7 +103,7 @@ def register_user(request):
         return redirect('register')
 
     User.objects.create_user(username=username, email=email, password=password)
-    messages.success(request, (_(f"{User} sukurtas!!!")) % username)
+    messages.success(request, f'{username} sukurtas!!!')
     return redirect('index')
 
 
@@ -198,18 +203,47 @@ class KrepselioEiluteByUserUpdateView(LoginRequiredMixin, UserPassesTestMixin, g
         return reverse("mano-krepselis", kwargs={"pk": pk})
 
 
-class KrepselioEiluteByUserCreateView(LoginRequiredMixin, generic.CreateView):
+class KrepselioEiluteByUserCreateView(LoginRequiredMixin, generic.CreateView, FormMixin):
     model = KrepselioEilutes
+    success_url = '/eparduotuve/krepseliai/'
     template_name = 'krepselio_eilutes_update.html'
     form_class = UserKrepselioEilutesCreateForm
 
+    # extra_context = {'krepselis': KrepselioEilutes.objects.get({"pk": pk})}
+
+    # def get_context_data(self, **kwargs):
+    #     pk = self.kwargs["pk"]
+    #     context = super().get_context_data(**kwargs)
+    #     for x in KrepselioEilutes.objects.all():
+    #         if x.krepselis_id == pk:
+    #             return context['krepselis'] == x.krepselis
+
+    # def post(self, request, *args, **kwargs):
+    #     self.object = self.get_object()
+    #     form = self.get_form()
+    #     if form.is_valid():
+    #         return self.form_valid(form)
+    #     else:
+    #         return self.form_invalid(form)
+
     def form_valid(self, form):
         form.instance.vartotojas = self.request.user
+        # pk = self.kwargs["pk"]
+        # sarasas = [KrepselioEilutes.objects.all().filter(krepselis_id=pk)]
+        # print(sarasas[0].get_object().krepselis)
+        # print(KrepselioEilutes.objects.all().filter(krepselis_id=pk).get_object())
+        # print(KrepselioEilutes.objects.get(krepselis_id=pk))
+        # print(self.get_object())
+        # for x in KrepselioEilutes.objects.all():
+        #     if x.krepselis_id == pk:
+        #         form.instance.krepselis = x.krepselis
+        #         break
+        # form.instance.krepselis = self.get_object()
+        # form.save()
         return super().form_valid(form)
 
-    def get_success_url(self):
-        pk = self.kwargs["pk"]
-        return reverse("mano-krepselis", kwargs={"pk": pk})
+    def successView(request):
+        return HttpResponse("Success! Thank you for your message.")
 
 
 class KrepselioEiluteByUserDeleteView(LoginRequiredMixin, UserPassesTestMixin, generic.DeleteView):
@@ -222,25 +256,29 @@ class KrepselioEiluteByUserDeleteView(LoginRequiredMixin, UserPassesTestMixin, g
         return krepselioeilute_o.krepselis.vartotojas == self.request.user
 
     def get_success_url(self):
-        pk = self.kwargs["pk"]
+        krepselioeilute = self.get_object()
+        pk = krepselioeilute.krepselis.id
         return reverse("mano-krepselis", kwargs={"pk": pk})
 
-# @login_required
-# def prideti_preke(request):
-#     if request.method == "POST":
-#         krepselis_form = KrepselisByUserUpdateView(request.POST)
-#         krepselioeilutes_form = KrepselioEiluteByUserUpdateView(request.POST, request.FILES)
-#         if krepselis_form.is_valid() and krepselioeilutes_form.is_valid():
-#             krepselis_form.save()
-#             krepselioeilutes_form.save()
-#             messages.success(request, f"Prekė pridėta")
-#             return redirect('prekes')
-#     else:
-#         krepselis_form = KrepselisByUserUpdateView(instance=request.user)
-#         krepselioeilutes_form = KrepselioEiluteByUserUpdateView(instance=request.user.profilis)
-#
-#     context = {
-#         'krepselis_form': krepselis_form,
-#         'krepselioeilutes_form': krepselioeilutes_form,
-#     }
-#     return render(request, 'krepselis_update.html', context)
+
+@login_required
+def contactView(request):
+    if request.method == "GET":
+        form = ContactForm()
+    else:
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            subject = form.cleaned_data["subject"]
+            from_email = form.cleaned_data["from_email"]
+            message = form.cleaned_data['message']
+            try:
+                send_mail(subject, message, from_email,[])
+            except BadHeaderError:
+                return HttpResponse("Invalid header found.")
+            return redirect("success")
+    return render(request, "email.html", {"form": form})
+
+
+def successView(request):
+    messages.success(request, 'Ačiū už žinutę!')
+    return redirect('index')

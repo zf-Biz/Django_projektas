@@ -55,8 +55,8 @@ class Krepselis(models.Model):
 
 
 class KrepselioEilutes(models.Model):
-    krepselis = models.ForeignKey(Krepselis, on_delete=models.SET_NULL,
-                                  null=True, verbose_name='Krepšelio numeris')
+    krepselis = models.ForeignKey(Krepselis, on_delete=models.SET_NULL, null=True,
+                                  blank=True, verbose_name='Krepšelio numeris')
     preke = models.ForeignKey('Preke', on_delete=models.SET_NULL,
                               null=True, verbose_name='Prekė')
     kiekis = models.IntegerField('Kiekis', null=True, blank=True)

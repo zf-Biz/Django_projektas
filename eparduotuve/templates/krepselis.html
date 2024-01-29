@@ -24,7 +24,7 @@
             {{ p.preke }}
         </a>
         {{ p.kiekis }} {% trans "vienetai" %}, {% trans "suma" %}: {{ p.suma }}
-        <a href="{% url 'eilute-istrinti' p.preke.id %}">
+        <a href="{% url 'eilute-istrinti' p.id %}">
             <button class="btn btn-outline-danger" type="submit">
                 {% trans "Pašalinti prekę" %}
             </button>

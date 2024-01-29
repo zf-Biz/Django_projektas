@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+<h1>{% trans "Susisiekite" %}</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form | crispy }}
+    <div class="form-actions">
+        <button class="btn btn-outline-dark" type="submit">
+            {% trans "Siųsti" %}
+        </button>
+    </div>
+</form>
+
+{% endblock %}

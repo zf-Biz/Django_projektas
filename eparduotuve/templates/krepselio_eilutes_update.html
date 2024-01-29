@@ -4,6 +4,9 @@
 {% load i18n %}
 
 {% block content %}
+{% for k in krepselioeilutes_set.all %}
+{{ k }}
+{% endfor %}
 
 <form method="post">
     {% csrf_token %}
@@ -18,4 +21,5 @@
     </fieldset>
 </form>
 
+{{ request.path }}
 {% endblock %}

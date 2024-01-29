@@ -206,9 +206,21 @@ msgstr "Product catalogue"
 msgid "EN"
 msgstr "EN"
 
+#: .\templates\base.html:120
+msgid "Susisiekite"
+msgstr "Contact us"
+
 #: .\templates\base.html:149
 msgid "Ieškoti"
 msgstr "Search"
+
+#: .\templates\email.html:7
+msgid "Susisiekite"
+msgstr "Contact us"
+
+#: .\templates\email.html:13
+msgid "Siųsti"
+msgstr "Send"
 
 #: .\templates\index.html:6
 msgid "Parduotuvė"

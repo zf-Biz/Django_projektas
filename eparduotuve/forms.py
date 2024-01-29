@@ -1,4 +1,6 @@
 from django import forms
+from django.conf import settings
+from django.core.mail import send_mail
 
 from .models import Atsiliepimas, User, Preke, Profilis, Krepselis, KrepselioEilutes
 
@@ -8,8 +10,8 @@ class PrekeAtsiliepimasForm(forms.ModelForm):
         model = Atsiliepimas
         fields = ('turinys', 'preke', 'vertintojas')
         widgets = {  # paslepiam laukus, kad būtų nevaizduojami formoje
-            'book': forms.HiddenInput(),
-            'reviewer': forms.HiddenInput(),
+            'preke': forms.HiddenInput(),
+            'vertintojas': forms.HiddenInput(),
 
         }
 
@@ -47,5 +49,11 @@ class UserKrepselioEilutesCreateForm(forms.ModelForm):
         model = KrepselioEilutes
         fields = ('krepselis', 'preke', 'kiekis')
         # widgets = {
-        #     'krepselis': forms.,
+        #     'krepselis': forms.HiddenInput(),
         # }
+
+
+class ContactForm(forms.Form):
+    from_email = forms.EmailField(required=True)
+    subject = forms.CharField(required=True)
+    message = forms.CharField(widget=forms.Textarea, required=True)

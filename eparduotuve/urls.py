@@ -10,6 +10,8 @@ urlpatterns = [
     path('prekes/<int:pk>', views.PrekeDetailView.as_view(), name='preke'),
     path("search/", views.search, name="search"),
     path('i18n/', include('django.conf.urls.i18n')),
+    path("contact/", views.contactView, name="contact"),
+    path("success/", views.successView, name="success"),
 
     path("register/", views.register_user, name="register"),
     path('profilis/', views.profilis, name='profilis'),
